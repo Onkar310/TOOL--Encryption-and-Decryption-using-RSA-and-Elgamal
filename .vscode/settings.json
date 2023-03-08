@@ -1,0 +1,8 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "d:\\Downloads\\bc-noncert-1.0.2.4-sources.jar",
+    "d:\\Downloads\\bcprov-jdk18on-172.jar"
+  ],
+  "java.debug.settings.onBuildFailureProceed": true
+}
