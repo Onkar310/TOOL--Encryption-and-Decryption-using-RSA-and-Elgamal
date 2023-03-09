@@ -1,8 +1,10 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.*;
+
 import java.awt.event.*;
 
 import Backend.*;
@@ -10,7 +12,7 @@ import Backend.*;
 public class GUI implements ActionListener {
 
     private static JButton proceed;
-    private static JTextPane inpuTextPane;
+    private static JTextArea inpuTextPane;
     private static JTextArea outpuTextPane;
     private static ButtonGroup algoButtonGroup;
     private static ButtonGroup methodButtonGroup;
@@ -18,6 +20,9 @@ public class GUI implements ActionListener {
     private static JRadioButton decryButton;
     private static JRadioButton rsaButton;
     private static JRadioButton elgButton;
+    private static JLabel method;
+    private static JLabel inputJLabel;
+    private static JLabel outJLabel;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -49,7 +54,7 @@ public class GUI implements ActionListener {
         panel.add(rsaButton);
         panel.add(elgButton);
 
-        JLabel method = new JLabel("Method");
+        method = new JLabel("Method");
         method.setBounds(10, 160, 85, 25);
         panel.add(method);
 
@@ -64,11 +69,13 @@ public class GUI implements ActionListener {
         panel.add(encryButton);
         panel.add(decryButton);
 
-        JLabel inputJLabel = new JLabel("Your input");
+        inputJLabel = new JLabel("Your input");
         inputJLabel.setBounds(10, 210, 85, 25);
         panel.add(inputJLabel);
 
-        inpuTextPane = new JTextPane();
+        inpuTextPane = new JTextArea();
+        inpuTextPane.setLineWrap(true);
+        inpuTextPane.setMargin(new Insets(10, 10, 10, 10));
         inpuTextPane.setText("Enter your message here...");
         JScrollPane inpJSP = new JScrollPane(inpuTextPane);
         inpJSP.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -76,7 +83,7 @@ public class GUI implements ActionListener {
         inpJSP.setBounds(100, 210, 400, 200);
         panel.add(inpJSP, BorderLayout.CENTER);
 
-        JLabel outJLabel = new JLabel("Output");
+        outJLabel = new JLabel("Output");
         outJLabel.setBounds(10, 450, 85, 25);
         panel.add(outJLabel);
 
@@ -139,20 +146,29 @@ public class GUI implements ActionListener {
 
             if (rsaButton.isSelected() && encryButton.isSelected()) {
                 System.out.println("Algorithm RSA selected for encryption");
+                inputJLabel.setText("Plain Text :");
+                outJLabel.setText("Encrypted :");
                 String encryptMsg = RSA.RSAEncryption(input);
                 outpuTextPane.setText(encryptMsg);
 
             } else if (rsaButton.isSelected() && decryButton.isSelected()) {
                 System.out.println("Algorithm RSA selected for decryption");
+                inputJLabel.setText("Encrypted :");
+                outJLabel.setText("Decrypted :");
+
                 String decryMsg = RSA.RSADecryption(input);
                 outpuTextPane.setText(decryMsg);
 
             } else if (elgButton.isSelected() && encryButton.isSelected()) {
+                inputJLabel.setText("Plain Text");
+                outJLabel.setText("Encrypted :");
 
                 String ELG_EncryptMsg = elGamal.ElgamalEncryption(input);
                 outpuTextPane.setText(ELG_EncryptMsg);
 
             } else if (elgButton.isSelected() && decryButton.isSelected()) {
+                inputJLabel.setText("Encrypted :");
+                outJLabel.setText("Decrypted :");
 
                 String ELG_DecryptMsg = elGamal.ElgamalDecryption(input);
                 outpuTextPane.setText(ELG_DecryptMsg);

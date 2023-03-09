@@ -98,7 +98,7 @@ public class elGamal {
             return encryptedMessage;
         } catch (Exception ingored) {
             System.out.println(ingored);
-            return "Error";
+            return ingored.getLocalizedMessage();
         }
 
     }

@@ -47,8 +47,6 @@ public class RSA {
 
             publicKey = keyFactory.generatePublic(keySpecPublic);
             privateKey = keyFactory.generatePrivate(keySpecPrivate);
-            System.out.println("----" + publicKey);
-            System.out.println("----" + privateKey);
 
         } catch (Exception ignored) {
         }
